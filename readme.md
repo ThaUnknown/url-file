@@ -1,4 +1,4 @@
-# Remote File
+# URL File
 
 Convert a `URL` to a `W3C File` like object, for consumption by other libraries. 
 

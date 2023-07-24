@@ -2,7 +2,7 @@
 	"name": "@thaunknown/url-file",
 	"type": "module",
 	"main": "index.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "ThaUnknown <ThaUnknown@users.noreply.github.com>",
   "description": "W3C-like file object for remote URLs.",
 	"keywords": [
