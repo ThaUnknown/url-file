@@ -1,5 +1,5 @@
 {
-	"name": "remote-file",
+	"name": "@thaunknown/url-file",
 	"type": "module",
 	"main": "index.js",
   "version": "1.0.0",
@@ -21,7 +21,7 @@
 	"license": "MIT",
 	"repository": {
     "type": "git",
-    "url": "git+https://github.com/ThaUnknown/jassub.git"
+    "url": "git+https://github.com/ThaUnknown/url-file.git"
   },
 	"funding": [
     {

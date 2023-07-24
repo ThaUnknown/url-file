@@ -9,7 +9,7 @@ The remote URL needs to be CORS enabled!
 # Usage
 
 ```js
-import URLFile, { fromURL } from 'remote-file'
+import URLFile, { fromURL } from '@thaunknown/url-file'
 
 // if you know the exact file information
 const file = new URLFile('https://avatars.githubusercontent.com/u/6506529?v=4', 195311)
@@ -35,7 +35,7 @@ console.log(blob instanceof globalThis.Blob) // true
 
 ```js
 import read from 'zip-go'
-import { fromURL } from 'remote-file'
+import { fromURL } from '@thaunknown/url-file'
 
 for await (const entry of read(await fromURL('https://example.com/file.zip'))) {
   // from zip-go readme:
