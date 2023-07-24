@@ -1,0 +1,32 @@
+{
+	"name": "remote-file",
+	"type": "module",
+	"main": "index.js",
+  "version": "1.0.0",
+  "author": "ThaUnknown <ThaUnknown@users.noreply.github.com>",
+  "description": "W3C-like file object for remote URLs.",
+	"keywords": [
+		"file",
+		"w3c file",
+		"w3c",
+		"html5 file",
+		"blob",
+		"http",
+		"url",
+		"remote"
+	],
+	"dependencies": {
+		"mime": "^3.0.0"
+	},
+	"license": "MIT",
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThaUnknown/jassub.git"
+  },
+	"funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/ThaUnknown"
+    }
+  ]
+}
