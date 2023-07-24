@@ -76,6 +76,6 @@ export default class URLFile {
  */
 export async function fromURL (url) {
   const { headers } = await fetch(url, { method: 'HEAD' })
-  const lastModifiedDate = Date.parse(headers.get('last-modified')) || new Date()
+  const lastModifiedDate = new Date(headers.get('last-modified') ?? Date.now())
   return new URLFile(url, Number(headers.get('content-length')), { type: headers.get('content-type'), lastModifiedDate, lastModified: +lastModifiedDate })
 }
