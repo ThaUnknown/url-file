@@ -12,7 +12,7 @@ export default class URLFile {
     this.lastModifiedDate = lastModifiedDate
     this.lastModified = lastModified
     this.start = start // inclusive
-    this.end = Math.min(end, size) // non-inclusive
+    this.end = end // non-inclusive
     this.fetch = fetch
   }
 
@@ -21,7 +21,6 @@ export default class URLFile {
       headers: {
         range: `bytes=${this.start}-${this.end - 1}/${this._size}`, // -1 as end is non-inclusive, and http requires inclusive
         'Content-Range': `bytes ${this.start}-${this.end - 1}/${this._size}`,
-        'Content-Length': `${this.end - this.start}`,
         'Cache-Control': 'no-store' // try forcing backpressure
       }
     })
@@ -33,9 +32,12 @@ export default class URLFile {
    */
   slice (start, end = this.size) {
     if (start == null || this.size === 0) return this
+    if (end < 0) end = Math.max(this.size + end, 0)
+    if (start < 0) start = Math.max(this.size + start, 0)
+
     if (end === 0) return new URLFile(this.url, 0, this)
 
-    const safeEnd = Math.min(this.size, end)
+    const safeEnd = Math.min(this._size, end)
     const safeStart = Math.min(start, safeEnd)
 
     const newSize = safeEnd - safeStart
@@ -47,28 +49,31 @@ export default class URLFile {
     return new URLFile(this.url, newSize, this, { start: this.start + safeStart, end: this.start + safeEnd })
   }
 
-  async stream () {
+  stream () {
     if (this.size === 0) return new ReadableStream()
-    const { body } = await this._get()
-    return body
+    const ts = new TransformStream()
+    this._get().then(res => res.body.pipeTo(ts.writable))
+    return ts.readable
   }
 
   async text () {
     if (this.size === 0) return ''
-    const { text } = await this._get()
-    return await text()
+    const res = await this._get()
+    const text = await res.text()
+    return text
   }
 
   async arrayBuffer () {
     if (this.size === 0) return new ArrayBuffer()
-    const { arrayBuffer } = await this._get()
-    return await arrayBuffer()
+    const res = await this._get()
+    const ab = await res.arrayBuffer()
+    return ab
   }
 
   async blob () {
     if (this.size === 0) return new Blob([], { type: this.type })
-    const { blob } = await this._get()
-    return await blob()
+    const res = await this._get()
+    return await res.blob()
   }
 }
 /**
@@ -76,6 +81,7 @@ export default class URLFile {
  */
 export async function fromURL (url) {
   const { headers } = await fetch(url, { method: 'HEAD' })
+  if (headers.get('accept-ranges') === 'none') throw new Error('Range requests not supported by remote')
   const lastModifiedDate = new Date(headers.get('last-modified') ?? Date.now())
   return new URLFile(url, Number(headers.get('content-length')), { type: headers.get('content-type'), lastModifiedDate, lastModified: +lastModifiedDate })
 }

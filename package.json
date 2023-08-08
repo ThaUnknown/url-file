@@ -2,9 +2,9 @@
 	"name": "@thaunknown/url-file",
 	"type": "module",
 	"main": "index.js",
-  "version": "1.0.1",
-  "author": "ThaUnknown <ThaUnknown@users.noreply.github.com>",
-  "description": "W3C-like file object for remote URLs.",
+	"version": "1.0.2",
+	"author": "ThaUnknown <ThaUnknown@users.noreply.github.com>",
+	"description": "W3C-like file object for remote URLs.",
 	"keywords": [
 		"file",
 		"w3c file",
@@ -20,13 +20,18 @@
 	},
 	"license": "MIT",
 	"repository": {
-    "type": "git",
-    "url": "git+https://github.com/ThaUnknown/url-file.git"
-  },
+		"type": "git",
+		"url": "git+https://github.com/ThaUnknown/url-file.git"
+	},
 	"funding": [
-    {
-      "type": "github",
-      "url": "https://github.com/sponsors/ThaUnknown"
-    }
-  ]
+		{
+			"type": "github",
+			"url": "https://github.com/sponsors/ThaUnknown"
+		}
+	],
+	"devDependencies": {
+		"finalhandler": "^1.2.0",
+		"serve-static": "^1.15.0",
+		"zip-go": "^1.0.1"
+	}
 }
