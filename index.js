@@ -10,7 +10,7 @@ export default class URLFile {
    * @param {string | URL} url
    * @param {number} size
    */
-  constructor (url, size, { type = '', lastModifiedDate = new Date(), lastModified = 0, name = null, fetch = globalThis.fetch, _size = size } = {}, { start = 0, end = size } = {}) {
+  constructor (url, size, { type = '', lastModifiedDate = new Date(), lastModified = 0, name = null, fetch = globalThis.fetch.bind(globalThis), _size = size } = {}, { start = 0, end = size } = {}) {
     if (size == null || isNaN(size)) throw new Error('Size is required!')
     this.url = new URL(url)
     this.size = size // instance size - sliced, fake
