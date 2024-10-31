@@ -1,4 +1,4 @@
-import mime from 'mime/lite.js'
+import mime from 'mime/lite'
 
 /**
  * @class
