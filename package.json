@@ -16,7 +16,7 @@
 		"remote"
 	],
 	"dependencies": {
-		"mime": "^3.0.0"
+		"mime": "^4.0.4"
 	},
 	"license": "MIT",
 	"repository": {
