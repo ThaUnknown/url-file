@@ -85,6 +85,11 @@ export default class URLFile {
     const res = await this._get()
     return await res.blob()
   }
+
+  async bytes() {
+    if (this.size === 0) return new Uint8Array(0)
+    return new Uint8Array(await this.arrayBuffer())
+  }
 }
 /**
  * @param  {string | URL} url
