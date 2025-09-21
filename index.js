@@ -29,10 +29,12 @@ export default class URLFile {
 
   _get () {
     return this.fetch(this.url, {
+      cache: 'no-cache',
       headers: {
         range: `bytes=${this.start}-${this.end - 1}`, // -1 as end is non-inclusive, and http requires inclusive
         'Content-Range': `bytes ${this.start}-${this.end - 1}/${this._size}`,
-        'Cache-Control': 'no-store' // try forcing backpressure
+        'Cache-Control': 'no-store', // try forcing backpressure
+        'Accept-Ranges': 'bytes'
       }
     })
   }
